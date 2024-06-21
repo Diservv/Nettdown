@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nettdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0px;
+            padding: 0px;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #350904;
+        }
+        
+       .nett{
+           color: #e52613;
+       }
+
+        header input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 40px;
+        }
+
+        main {
+            padding-top: 80px; /* Espaço para o header fixo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            height: auto;
+        }
+
+        .indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .indicators span {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .indicators .active {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: background-color 0.3s ease;
+            flex: 1 0 calc(25% - 40px);
+            max-width: calc(25% - 40px);
+        }
+
+        .item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .item img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .item a {
+            display: block;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .item p {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .ads {
+            background-color: #fff8e1;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ffd54f;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .genres {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .genres button {
+            margin: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .genres button:hover {
+            background-color: #0056b3;
+        }
+
+        .genre-title {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .other-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .other-section .item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            flex: 1 0 calc(25% - 40px);
+            max-width: calc(25% - 40px);
+        }
+
+        .other-section .item:hover {
+            transform: scale(1.05);
+        }
+
+        .other-section .item img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .other-section .item a {
+            display: block;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .other-section .item p {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><span class="nett">Nett</span>down</div>
+        <input type="text" id="search" placeholder="Pesquisar...">
+    </header>
+    <main>
+        <div class="carousel">
+            <div class="slides">
+                <img src="https://via.placeholder.com/800x400?text=Imagem+1" alt="Imagem 1">
+                <img src="https://via.placeholder.com/800x400?text=Imagem+2" alt="Imagem 2">
+                <img src="https://via.placeholder.com/800x400?text=Imagem+3" alt="Imagem 3">
+            </div>
+            <div class="indicators">
+                <span data-index="0" class="active"></span>
+                <span data-index="1"></span>
+                <span data-index="2"></span>
+            </div>
+        </div>
+        <div class="items">
+            <div class="item" data-genre="lançamento">
+                <img src="https://via.placeholder.com/200" alt="Item 1">
+                <a href="#">Item 1</a>
+                <p>Descrição curta do item 1. Gêneros: Lançamento, Ação, Aventura</p>
+            </div>
+            <div class="item" data-genre="anime">
+                <img src="https://via.placeholder.com/200" alt="Item 2">
+                <a href="#">Item 2</a>
+                <p>Descrição curta do item 2. Gêneros: Anime, Fantasia</p>
+            </div>
+            <div class="item" data-genre="series">
+                <img src="https://via.placeholder.com/200" alt="Item 3">
+                <a href="#">Item 3</a>
+                <p>Descrição curta do item 3. Gêneros: Série, Drama</p>
+            </div>
+            <div class="item" data-genre="filmes">
+                <img src="https://via.placeholder.com/200" alt="Item 4">
+                <a href="#">Item 4</a>
+                <p>Descrição curta do item 4. Gêneros: Filme, Comédia</p>
+            </div>
+            <div class="item" data-genre="lançamento">
+                <img src="https://via.placeholder.com/200" alt="Item 5">
+                <a href="#">Item 5</a>
+                <p>Descrição curta do item 5. Gêneros: Lançamento, Terror</p>
+            </div>
+            <div class="item" data-genre="anime">
+                <img src="https://via.placeholder.com/200" alt="Item 6">
+                <a href="#">Item 6</a>
+                <p>Descrição curta do item 6. Gêneros: Anime, Ação</p>
+            </div>
+            <div class="item" data-genre="series">
+                <img src="https://via.placeholder.com/200" alt="Item 7">
+                <a href="#">Item 7</a>
+                <p>Descrição curta do item 7.Gêneros: Série, Comédia</p>
+            </div>
+            <div class="item" data-genre="filmes">
+                <img src="https://via.placeholder.com/200" alt="Item 8">
+                <a href="#">Item 8</a>
+                <p>Descrição curta do item 8. Gêneros: Filme, Ação</p>
+            </div>
+        </div>
+        <div class="ads">
+            <p>Espaço para anúncios</p>
+        </div>
+        <div class="genres">
+            <button onclick="filterItems('todos')">Todos</button>
+            <button onclick="filterItems('lançamento')">Lançamentos</button>
+            <button onclick="filterItems('anime')">Animes</button>
+            <button onclick="filterItems('series')">Séries</button>
+            <button onclick="filterItems('filmes')">Filmes</button>
+        </div>
+        <div class="genre-title">
+            <h3 id="genre-title">Gênero: Todos</h3>
+        </div>
+        <div class="other-section" id="other-section">
+            <div class="item" data-genre="lançamento">
+                <img src="https://via.placeholder.com/200" alt="Item A">
+                <a href="#">Item A</a>
+                <p>Descrição curta do item A. Gêneros: Lançamento</p>
+            </div>
+            <div class="item" data-genre="lançamento">
+                <img src="https://via.placeholder.com/200" alt="Item B">
+                <a href="#">Item B</a>
+                <p>Descrição curta do item B. Gêneros: Lançamento</p>
+            </div>
+            <div class="item" data-genre="anime">
+                <img src="https://via.placeholder.com/200" alt="Item C">
+                <a href="#">Item C</a>
+                <p>Descrição curta do item C. Gêneros: Anime</p>
+            </div>
+            <div class="item" data-genre="anime">
+                <img src="https://via.placeholder.com/200" alt="Item D">
+                <a href="#">Item D</a>
+                <p>Descrição curta do item D. Gêneros: Anime</p>
+            </div>
+            <div class="item" data-genre="series">
+                <img src="https://via.placeholder.com/200" alt="Item E">
+                <a href="#">Item E</a>
+                <p>Descrição curta do item E. Gêneros: Série</p>
+            </div>
+            <div class="item" data-genre="series">
+                <img src="https://via.placeholder.com/200" alt="Item F">
+                <a href="#">Item F</a>
+                <p>Descrição curta do item F. Gêneros: Série</p>
+            </div>
+        </div>
+        <div class="ads">
+            <p>Espaço para mais anúncios</p>
+        </div>
+    </main>
+    <script>
+        // Função para filtrar os itens com base no gênero selecionado
+        function filterItems(genre) {
+            const items = document.querySelectorAll('.item');
+            const genreTitle = document.getElementById('genre-title');
+            
+            items.forEach(item => {
+                const itemGenre = item.getAttribute('data-genre');
+                if (genre === 'todos' || itemGenre === genre) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Atualiza o título do gênero atual
+            genreTitle.textContent = `Gênero: ${genre.charAt(0).toUpperCase() + genre.slice(1)}`;
+        }
+    </script>
+</body>
+</html>
